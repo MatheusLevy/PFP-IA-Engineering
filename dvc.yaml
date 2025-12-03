@@ -1,0 +1,34 @@
+stages:
+  build_splits:
+    cmd: python steps/01_generate_splits.py
+    deps:
+      - steps/01_generate_splits.py
+      - dataset_info.csv
+      - data/
+    outs:
+      - dataset/
+  train_model:
+    cmd: python steps/02_train_model.py
+    deps:
+      - steps/02_train_model.py
+      - dataset/
+      - data/
+    outs:
+      - training_info.json
+  log_model:
+    cmd: python steps/03_log_model.py
+    deps:
+      - steps/03_log_model.py
+      - training_info.json
+  promote_to_staging:
+    cmd: python steps/04_promote_to_staging.py
+    deps:
+      - steps/04_promote_to_staging.py
+      - training_info.yaml
+  validate_with_production:
+    cmd: python steps/05_validate_with_production.py
+    deps:
+      - steps/05_validate_with_production.py
+      - training_info.yaml
+      - data/
+  

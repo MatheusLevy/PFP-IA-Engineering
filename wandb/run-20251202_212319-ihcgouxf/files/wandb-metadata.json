@@ -1,0 +1,38 @@
+{
+  "os": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+  "python": "CPython 3.14.0",
+  "startedAt": "2025-12-03T00:23:19.598977Z",
+  "program": "/home/matheus/Documents/PFP-IA-Engineering/steps/02_train_model.py",
+  "codePath": "steps/02_train_model.py",
+  "codePathLocal": "steps/02_train_model.py",
+  "git": {
+    "remote": "git@github.com:MatheusLevy/PFP-IA-Engineering.git",
+    "commit": "69393623ce45e0ee5a0d1f11b84723a52867339f"
+  },
+  "root": "/home/matheus/Documents/PFP-IA-Engineering",
+  "host": "DESKTOP-0LTH7GV",
+  "executable": "/home/matheus/Documents/PFP-IA-Engineering/.venv/bin/python",
+  "cpu_count": 6,
+  "cpu_count_logical": 12,
+  "gpu": "NVIDIA GeForce RTX 3070",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "1081101176832",
+      "used": "67765379072"
+    }
+  },
+  "memory": {
+    "total": "25200635904"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 3070",
+      "memoryTotal": "8589934592",
+      "architecture": "Ampere",
+      "uuid": "GPU-b349ee67-4489-accd-d843-c3a927d2fe27"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "writerId": "t9qwrgk5a4j7in4oqvgga4bgl9x83be8"
+}

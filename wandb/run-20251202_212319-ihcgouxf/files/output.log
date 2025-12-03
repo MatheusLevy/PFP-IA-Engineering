@@ -1,0 +1,65 @@
+🚀 Started wandb run: trial/0 (ID: ihcgouxf)
+📋 Trial 0 parameters:
+   Model: yolo12n, Batch: 12, ImgSz: 512
+   Optimizer: AdamW, LR: 0.000043
+   Group: study-2025-12-03__build_local__data_v42
+   Run: trial/0
+----------------------------------------------------------------------
+[KDownloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12n.pt to 'yolo12n.pt': 100% ━━━━━━━━━━━━ 5.3MB 78.9MB/s 0.1s
+🏋️ Starting training for trial 0...
+Searching for 1 idle GPUs with free memory >= 20.0% and free utilization >= 0.0%...
+Selected idle CUDA devices [0]
+Ultralytics 8.3.234 🚀 Python-3.14.0 torch-2.9.1+cu126 CUDA:0 (NVIDIA GeForce RTX 3070, 8192MiB)
+[34m[1mengine/trainer: [0magnostic_nms=False, amp=True, augment=False, auto_augment=randaugment, batch=12, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, compile=False, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=./dataset/data_freeze.yaml, degrees=0.0, deterministic=True, device=0, dfl=1.5, dnn=False, dropout=0.44713734167944486, dynamic=False, embed=None, epochs=10, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=512, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=4.3297641546726356e-05, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=yolo12n.pt, momentum=0.937, mosaic=1.0, multi_scale=True, name=train, nbs=64, nms=False, opset=None, optimize=False, optimizer=AdamW, overlap_mask=True, patience=100, perspective=0.0, plots=True, pose=12.0, pretrained=True, profile=False, project=None, rect=False, resume=False, retina_masks=False, save=False, save_conf=False, save_crop=False, save_dir=/home/matheus/Documents/PFP-IA-Engineering/runs/detect/train, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=0, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=False, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=11, workspace=None
+Overriding model.yaml nc=80 with nc=3
+
+                   from  n    params  module                                       arguments
+  0                  -1  1       464  ultralytics.nn.modules.conv.Conv             [3, 16, 3, 2]
+  1                  -1  1      4672  ultralytics.nn.modules.conv.Conv             [16, 32, 3, 2]
+  2                  -1  1      6640  ultralytics.nn.modules.block.C3k2            [32, 64, 1, False, 0.25]
+  3                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]
+  4                  -1  1     26080  ultralytics.nn.modules.block.C3k2            [64, 128, 1, False, 0.25]
+  5                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]
+  6                  -1  2    180864  ultralytics.nn.modules.block.A2C2f           [128, 128, 2, True, 4]
+  7                  -1  1    295424  ultralytics.nn.modules.conv.Conv             [128, 256, 3, 2]
+  8                  -1  2    689408  ultralytics.nn.modules.block.A2C2f           [256, 256, 2, True, 1]
+  9                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 10             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 11                  -1  1     86912  ultralytics.nn.modules.block.A2C2f           [384, 128, 1, False, -1]
+ 12                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 13             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 14                  -1  1     24000  ultralytics.nn.modules.block.A2C2f           [256, 64, 1, False, -1]
+ 15                  -1  1     36992  ultralytics.nn.modules.conv.Conv             [64, 64, 3, 2]
+ 16            [-1, 11]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 17                  -1  1     74624  ultralytics.nn.modules.block.A2C2f           [192, 128, 1, False, -1]
+ 18                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]
+ 19             [-1, 8]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 20                  -1  1    378880  ultralytics.nn.modules.block.C3k2            [384, 256, 1, True]
+ 21        [14, 17, 20]  1    431257  ultralytics.nn.modules.head.Detect           [3, [64, 128, 256]]
+YOLOv12n summary: 272 layers, 2,568,633 parameters, 2,568,617 gradients, 6.5 GFLOPs
+
+Transferred 640/691 items from pretrained weights
+Freezing layer 'model.21.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks...
+[KDownloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo11n.pt to 'yolo11n.pt': 100% ━━━━━━━━━━━━ 5.4MB 51.2MB/s 0.1s.1s<0.0s
+[34m[1mAMP: [0mchecks passed ✅
+[34m[1mtrain: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 1402.3±504.7 MB/s, size: 29.4 KB)
+[K[34m[1mtrain: [0mScanning /home/matheus/Documents/PFP-IA-Engineering/dataset/train/labels... 599 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 599/599 1.7Kit/s 0.3s0.1ss
+[34m[1mtrain: [0mNew cache created: /home/matheus/Documents/PFP-IA-Engineering/dataset/train/labels.cache
+[34m[1mval: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 693.0±241.9 MB/s, size: 32.5 KB)
+[K[34m[1mval: [0mScanning /home/matheus/Documents/PFP-IA-Engineering/dataset/valid/labels... 86 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 86/86 1.8Kit/s 0.0s
+[34m[1mval: [0mNew cache created: /home/matheus/Documents/PFP-IA-Engineering/dataset/valid/labels.cache
+Plotting labels to /home/matheus/Documents/PFP-IA-Engineering/runs/detect/train/labels.jpg...
+[34m[1moptimizer:[0m AdamW(lr=4.3297641546726356e-05, momentum=0.937) with parameter groups 113 weight(decay=0.0), 120 weight(decay=0.00046875), 119 bias(decay=0.0)
+2025/12/02 21:23:47 INFO mlflow.tracking.fluent: Experiment with name '/Shared/Ultralytics' does not exist. Creating a new experiment.
+[34m[1mMLflow: [0mlogging run_id(0a4f117ad0ab4ce894f707dab55fed22) to runs/mlflow
+[34m[1mMLflow: [0mview at http://127.0.0.1:5000 with 'mlflow server --backend-store-uri runs/mlflow'
+[34m[1mMLflow: [0mdisable with 'yolo settings mlflow=False'
+Image sizes 512 train, 512 val
+Using 11 dataloader workers
+Logging results to [1m/home/matheus/Documents/PFP-IA-Engineering/runs/detect/train[0m
+Starting training for 10 epochs...
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+[K       1/10      4.13G      1.544      4.297      1.801         15        544: 6% ╸─────────── 3/50 8.6s/it 16.5s<6:443

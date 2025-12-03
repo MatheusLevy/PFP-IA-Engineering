@@ -1,0 +1,90 @@
+2025-12-02 18:22:57,235 - INFO - Dataset: data
+2025-12-02 18:22:57,235 - INFO - Classes: ['Paper', 'Rock', 'Scissors']
+2025-12-02 18:22:57,235 - INFO - Saída: analysis
+2025-12-02 18:22:57,235 - INFO - ============================================================
+2025-12-02 18:22:57,236 - INFO - INICIANDO ANÁLISE COMPLETA DO DATASET
+2025-12-02 18:22:57,236 - INFO - ============================================================
+2025-12-02 18:22:57,236 - INFO - 
+1. ANALISANDO DISTRIBUIÇÃO DE CLASSES...
+2025-12-02 18:22:57,242 - INFO - Distribuição de classes salva em: analysis/class_distribution.csv, analysis/class_distribution.txt
+2025-12-02 18:22:58,152 - INFO - Gráfico de distribuição salvo em: analysis/class_distribution_chart.png
+2025-12-02 18:22:58,152 - INFO - 
+2. ANALISANDO DISTRIBUIÇÃO DE OBJETOS...
+2025-12-02 18:22:58,157 - INFO - 
+3. ANALISANDO AMOSTRAS NEGATIVAS...
+2025-12-02 18:22:58,525 - INFO - Gráfico de amostras negativas salvo em: analysis/negative_samples/negative_samples_chart.png
+2025-12-02 18:22:58,526 - INFO - 
+4. ANALISANDO TAMANHO E PROPORÇÃO...
+2025-12-02 18:22:58,527 - WARNING - Nenhum dado para análise de tamanho/proporção
+2025-12-02 18:22:58,527 - INFO - 
+5. ANALISANDO DISTRIBUIÇÃO ESPACIAL...
+2025-12-02 18:22:58,528 - WARNING - Nenhum dado para análise espacial
+2025-12-02 18:22:58,528 - INFO - 
+6. GERANDO EXEMPLOS VISUAIS...
+2025-12-02 18:22:58,528 - WARNING - Diretório não encontrado para split: train
+2025-12-02 18:22:58,528 - WARNING - Diretório não encontrado para split: valid
+2025-12-02 18:22:58,529 - WARNING - Diretório não encontrado para split: test
+2025-12-02 18:22:58,529 - INFO - 
+7. GERANDO RESUMO GERAL...
+2025-12-02 18:22:58,529 - ERROR - Erro inesperado: division by zero
+Traceback (most recent call last):
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_generate_analises.py", line 1106, in main
+    analyzer.run_all_analyses()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_generate_analises.py", line 1004, in run_all_analyses
+    self._create_summary(class_results, obj_results, neg_results)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_generate_analises.py", line 1074, in _create_summary
+    if total_empty / total_images > 0.1:
+       ~~~~~~~~~~~~^~~~~~~~~~~~~~
+ZeroDivisionError: division by zero
+2025-12-02 18:24:19,408 - ERROR - Diretório 'data' não encontrado em: .
+2025-12-02 18:24:19,408 - INFO - Estrutura esperada:
+2025-12-02 18:24:19,409 - INFO -   data/
+2025-12-02 18:24:19,409 - INFO -   ├── train/
+2025-12-02 18:24:19,409 - INFO -   │   ├── images/
+2025-12-02 18:24:19,409 - INFO -   │   └── labels/
+2025-12-02 18:24:19,409 - INFO -   ├── valid/
+2025-12-02 18:24:19,409 - INFO -   │   ├── images/
+2025-12-02 18:24:19,409 - INFO -   │   └── labels/
+2025-12-02 18:24:19,409 - INFO -   └── data.yaml
+2025-12-02 18:25:04,245 - INFO - Dataset: data
+2025-12-02 18:25:04,245 - INFO - Classes: ['Paper', 'Rock', 'Scissors']
+2025-12-02 18:25:04,245 - INFO - Saída: analysis
+2025-12-02 18:25:04,245 - INFO - ============================================================
+2025-12-02 18:25:04,245 - INFO - INICIANDO ANÁLISE COMPLETA DO DATASET
+2025-12-02 18:25:04,245 - INFO - ============================================================
+2025-12-02 18:25:04,245 - INFO - 
+1. ANALISANDO DISTRIBUIÇÃO DE CLASSES...
+2025-12-02 18:25:04,248 - INFO - Distribuição de classes salva em: analysis/class_distribution.csv, analysis/class_distribution.txt
+2025-12-02 18:25:05,140 - INFO - Gráfico de distribuição salvo em: analysis/class_distribution_chart.png
+2025-12-02 18:25:05,140 - INFO - 
+2. ANALISANDO DISTRIBUIÇÃO DE OBJETOS...
+2025-12-02 18:25:05,142 - INFO - 
+3. ANALISANDO AMOSTRAS NEGATIVAS...
+2025-12-02 18:25:05,548 - INFO - Gráfico de amostras negativas salvo em: analysis/negative_samples/negative_samples_chart.png
+2025-12-02 18:25:05,548 - INFO - 
+4. ANALISANDO TAMANHO E PROPORÇÃO...
+2025-12-02 18:25:05,549 - WARNING - Nenhum dado para análise de tamanho/proporção
+2025-12-02 18:25:05,549 - INFO - 
+5. ANALISANDO DISTRIBUIÇÃO ESPACIAL...
+2025-12-02 18:25:05,550 - WARNING - Nenhum dado para análise espacial
+2025-12-02 18:25:05,550 - INFO - 
+6. GERANDO EXEMPLOS VISUAIS...
+2025-12-02 18:25:05,550 - WARNING - Diretório não encontrado para split: train
+2025-12-02 18:25:05,550 - WARNING - Diretório não encontrado para split: valid
+2025-12-02 18:25:05,550 - WARNING - Diretório não encontrado para split: test
+2025-12-02 18:25:05,550 - INFO - 
+7. GERANDO RESUMO GERAL...
+2025-12-02 18:25:05,550 - ERROR - Erro inesperado: division by zero
+Traceback (most recent call last):
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_generate_analises.py", line 1106, in main
+    analyzer.run_all_analyses()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_generate_analises.py", line 1004, in run_all_analyses
+    self._create_summary(class_results, obj_results, neg_results)
+    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_generate_analises.py", line 1074, in _create_summary
+    if total_empty / total_images > 0.1:
+       ~~~~~~~~~~~~^~~~~~~~~~~~~~
+ZeroDivisionError: division by zero

@@ -1,0 +1,14 @@
+artifact_uri: /home/matheus/Documents/PFP-IA-Engineering/runs/mlflow/222773775549711198/0a4f117ad0ab4ce894f707dab55fed22/artifacts
+end_time: 1764721792342
+entry_point_name: ''
+experiment_id: '222773775549711198'
+lifecycle_stage: active
+run_id: 0a4f117ad0ab4ce894f707dab55fed22
+run_name: train
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1764721427145
+status: 3
+tags: []
+user_id: matheus

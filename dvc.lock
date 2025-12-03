@@ -1,0 +1,24 @@
+schema: '2.0'
+stages:
+  build_splits:
+    cmd: python steps/01_generate_splits.py
+    deps:
+    - path: data/
+      hash: md5
+      md5: 7d9df64b96918a415aeb8b0940f5e823.dir
+      size: 46940923
+      nfiles: 2935
+    - path: dataset_info.csv
+      hash: md5
+      md5: a4250bd173f814c7ac76170733f63219
+      size: 227377
+    - path: steps/01_generate_splits.py
+      hash: md5
+      md5: 2da429b7af04c89a1ff2bc5d444847fb
+      size: 6037
+    outs:
+    - path: dataset/
+      hash: md5
+      md5: 1d2ca6e71b593a2948b40253453466a8.dir
+      size: 31815356
+      nfiles: 2165

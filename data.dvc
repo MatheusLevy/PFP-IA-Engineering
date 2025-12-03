@@ -1,0 +1,13 @@
+md5: aa50ba054ef4499ff6371cf83e11611c
+frozen: true
+deps:
+- path: data
+  repo:
+    url: https://github.com/MatheusLevy/PFP-DataLabeling
+    rev_lock: 7aef7d8a395a4d0c0067d912a65d40d8039bf505
+outs:
+- md5: 7d9df64b96918a415aeb8b0940f5e823.dir
+  size: 46940923
+  nfiles: 2935
+  hash: md5
+  path: data

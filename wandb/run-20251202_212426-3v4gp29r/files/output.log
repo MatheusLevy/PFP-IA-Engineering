@@ -1,0 +1,273 @@
+🚀 Started wandb run: trial/1 (ID: 3v4gp29r)
+📋 Trial 1 parameters:
+   Model: yolo12s, Batch: 8, ImgSz: 256
+   Optimizer: SGD, LR: 0.000056
+   Group: study-2025-12-03__build_local__data_v42
+   Run: trial/1
+----------------------------------------------------------------------
+[KDownloading https://github.com/ultralytics/assets/releases/download/v8.3.0/yolo12s.pt to 'yolo12s.pt': 100% ━━━━━━━━━━━━ 18.1MB 93.6MB/s 0.2s.1s<0.1s
+🏋️ Starting training for trial 1...
+Searching for 1 idle GPUs with free memory >= 20.0% and free utilization >= 0.0%...
+Selected idle CUDA devices [0]
+Ultralytics 8.3.234 🚀 Python-3.14.0 torch-2.9.1+cu126 CUDA:0 (NVIDIA GeForce RTX 3070, 8192MiB)
+[34m[1mengine/trainer: [0magnostic_nms=False, amp=True, augment=False, auto_augment=randaugment, batch=8, bgr=0.0, box=7.5, cache=False, cfg=None, classes=None, close_mosaic=10, cls=0.5, compile=False, conf=None, copy_paste=0.0, copy_paste_mode=flip, cos_lr=False, cutmix=0.0, data=./dataset/data_freeze.yaml, degrees=0.0, deterministic=True, device=0, dfl=1.5, dnn=False, dropout=0.0908786358473959, dynamic=False, embed=None, epochs=10, erasing=0.4, exist_ok=False, fliplr=0.5, flipud=0.0, format=torchscript, fraction=1.0, freeze=None, half=False, hsv_h=0.015, hsv_s=0.7, hsv_v=0.4, imgsz=256, int8=False, iou=0.7, keras=False, kobj=1.0, line_width=None, lr0=5.613136993481251e-05, lrf=0.01, mask_ratio=4, max_det=300, mixup=0.0, mode=train, model=yolo12s.pt, momentum=0.937, mosaic=1.0, multi_scale=False, name=train2, nbs=64, nms=False, opset=None, optimize=False, optimizer=SGD, overlap_mask=True, patience=100, perspective=0.0, plots=True, pose=12.0, pretrained=True, profile=False, project=None, rect=False, resume=False, retina_masks=False, save=False, save_conf=False, save_crop=False, save_dir=/home/matheus/Documents/PFP-IA-Engineering/runs/detect/train2, save_frames=False, save_json=False, save_period=-1, save_txt=False, scale=0.5, seed=0, shear=0.0, show=False, show_boxes=True, show_conf=True, show_labels=True, simplify=True, single_cls=False, source=None, split=val, stream_buffer=False, task=detect, time=None, tracker=botsort.yaml, translate=0.1, val=True, verbose=False, vid_stride=1, visualize=False, warmup_bias_lr=0.1, warmup_epochs=3.0, warmup_momentum=0.8, weight_decay=0.0005, workers=11, workspace=None
+Overriding model.yaml nc=80 with nc=3
+
+                   from  n    params  module                                       arguments
+  0                  -1  1       928  ultralytics.nn.modules.conv.Conv             [3, 32, 3, 2]
+  1                  -1  1     18560  ultralytics.nn.modules.conv.Conv             [32, 64, 3, 2]
+  2                  -1  1     26080  ultralytics.nn.modules.block.C3k2            [64, 128, 1, False, 0.25]
+  3                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]
+  4                  -1  1    103360  ultralytics.nn.modules.block.C3k2            [128, 256, 1, False, 0.25]
+  5                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]
+  6                  -1  2    689408  ultralytics.nn.modules.block.A2C2f           [256, 256, 2, True, 4]
+  7                  -1  1   1180672  ultralytics.nn.modules.conv.Conv             [256, 512, 3, 2]
+  8                  -1  2   2689536  ultralytics.nn.modules.block.A2C2f           [512, 512, 2, True, 1]
+  9                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 10             [-1, 6]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 11                  -1  1    345856  ultralytics.nn.modules.block.A2C2f           [768, 256, 1, False, -1]
+ 12                  -1  1         0  torch.nn.modules.upsampling.Upsample         [None, 2, 'nearest']
+ 13             [-1, 4]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 14                  -1  1     95104  ultralytics.nn.modules.block.A2C2f           [512, 128, 1, False, -1]
+ 15                  -1  1    147712  ultralytics.nn.modules.conv.Conv             [128, 128, 3, 2]
+ 16            [-1, 11]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 17                  -1  1    296704  ultralytics.nn.modules.block.A2C2f           [384, 256, 1, False, -1]
+ 18                  -1  1    590336  ultralytics.nn.modules.conv.Conv             [256, 256, 3, 2]
+ 19             [-1, 8]  1         0  ultralytics.nn.modules.conv.Concat           [1]
+ 20                  -1  1   1511424  ultralytics.nn.modules.block.C3k2            [768, 512, 1, True]
+ 21        [14, 17, 20]  1    820569  ultralytics.nn.modules.head.Detect           [3, [128, 256, 512]]
+YOLOv12s summary: 272 layers, 9,254,297 parameters, 9,254,281 gradients, 21.5 GFLOPs
+
+Transferred 685/691 items from pretrained weights
+Freezing layer 'model.21.dfl.conv.weight'
+[34m[1mAMP: [0mrunning Automatic Mixed Precision (AMP) checks...
+[34m[1mAMP: [0mchecks passed ✅
+[34m[1mtrain: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 1438.6±589.1 MB/s, size: 29.7 KB)
+[K[34m[1mtrain: [0mScanning /home/matheus/Documents/PFP-IA-Engineering/dataset/train/labels.cache... 599 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 599/599 2.5Mit/s 0.0s0s
+[34m[1mval: [0mFast image access ✅ (ping: 0.0±0.0 ms, read: 1059.8±226.5 MB/s, size: 39.5 KB)
+[K[34m[1mval: [0mScanning /home/matheus/Documents/PFP-IA-Engineering/dataset/valid/labels.cache... 86 images, 0 backgrounds, 0 corrupt: 100% ━━━━━━━━━━━━ 86/86 161.1Kit/s 0.0s
+Plotting labels to /home/matheus/Documents/PFP-IA-Engineering/runs/detect/train2/labels.jpg...
+[34m[1moptimizer:[0m SGD(lr=5.613136993481251e-05, momentum=0.937) with parameter groups 113 weight(decay=0.0), 120 weight(decay=0.0005), 119 bias(decay=0.0)
+[34m[1mMLflow: [0mlogging run_id(0a4f117ad0ab4ce894f707dab55fed22) to runs/mlflow
+[34m[1mMLflow: [0mview at http://127.0.0.1:5000 with 'mlflow server --backend-store-uri runs/mlflow'
+[34m[1mMLflow: [0mdisable with 'yolo settings mlflow=False'
+WARNING ⚠️ [34m[1mMLflow: [0mFailed to initialize: Changing param values is not allowed. Param with key='model' was already logged with value='yolo12n.pt' for run ID='0a4f117ad0ab4ce894f707dab55fed22'. Attempted logging new value 'yolo12s.pt'.
+WARNING ⚠️ [34m[1mMLflow: [0mNot tracking this run
+Image sizes 256 train, 256 val
+Using 11 dataloader workers
+Logging results to [1m/home/matheus/Documents/PFP-IA-Engineering/runs/detect/train2[0m
+Starting training for 10 epochs...
+Closing dataloader mosaic
+
+      Epoch    GPU_mem   box_loss   cls_loss   dfl_loss  Instances       Size
+Exception in thread Thread-32 (_pin_memory_loop):
+Traceback (most recent call last):
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/threading.py"[0m, line [35m1081[0m, in [35m_bootstrap_inner[0m
+    [31mself._context.run[0m[1;31m(self.run)[0m
+    [31m~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^[0m
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/threading.py"[0m, line [35m1023[0m, in [35mrun[0m
+    [31mself._target[0m[1;31m(*self._args, **self._kwargs)[0m
+    [31m~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/utils/data/_utils/pin_memory.py"[0m, line [35m52[0m, in [35m_pin_memory_loop[0m
+    [31mdo_one_step[0m[1;31m()[0m
+    [31m~~~~~~~~~~~[0m[1;31m^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/utils/data/_utils/pin_memory.py"[0m, line [35m28[0m, in [35mdo_one_step[0m
+    r = in_queue.get(timeout=MP_STATUS_CHECK_INTERVAL)
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/queues.py"[0m, line [35m120[0m, in [35mget[0m
+    return [31m_ForkingPickler.loads[0m[1;31m(res)[0m
+           [31m~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/multiprocessing/reductions.py"[0m, line [35m541[0m, in [35mrebuild_storage_fd[0m
+    fd = df.detach()
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/resource_sharer.py"[0m, line [35m57[0m, in [35mdetach[0m
+    with [31m_resource_sharer.get_connection[0m[1;31m(self._id)[0m as conn:
+         [31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^[0m
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/resource_sharer.py"[0m, line [35m86[0m, in [35mget_connection[0m
+    c = Client(address, authkey=process.current_process().authkey)
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/connection.py"[0m, line [35m536[0m, in [35mClient[0m
+    c = SocketClient(address)
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/connection.py"[0m, line [35m664[0m, in [35mSocketClient[0m
+    [31ms.connect[0m[1;31m(address)[0m
+    [31m~~~~~~~~~[0m[1;31m^^^^^^^^^[0m
+[1;35mFileNotFoundError[0m: [35m[Errno 2] No such file or directory[0m
+Exception in thread Thread-33 (_pin_memory_loop):
+Traceback (most recent call last):
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/threading.py"[0m, line [35m1081[0m, in [35m_bootstrap_inner[0m
+    [31mself._context.run[0m[1;31m(self.run)[0m
+    [31m~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^[0m
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/threading.py"[0m, line [35m1023[0m, in [35mrun[0m
+    [31mself._target[0m[1;31m(*self._args, **self._kwargs)[0m
+    [31m~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[K: 0% ──────────── 0/75  4:20
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/utils/data/_utils/pin_memory.py"[0m, line [35m52[0m, in [35m_pin_memory_loop[0m
+    [31mdo_one_step[0m[1;31m()[0m
+    [31m~~~~~~~~~~~[0m[1;31m^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/utils/data/_utils/pin_memory.py"[0m, line [35m28[0m, in [35mdo_one_step[0m
+    r = in_queue.get(timeout=MP_STATUS_CHECK_INTERVAL)
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/queues.py"[0m, line [35m120[0m, in [35mget[0m
+    return [31m_ForkingPickler.loads[0m[1;31m(res)[0m
+           [31m~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/multiprocessing/reductions.py"[0m, line [35m541[0m, in [35mrebuild_storage_fd[0m
+    fd = df.detach()
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/resource_sharer.py"[0m, line [35m57[0m, in [35mdetach[0m
+    with [31m_resource_sharer.get_connection[0m[1;31m(self._id)[0m as conn:
+         [31m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^[0m
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/resource_sharer.py"[0m, line [35m86[0m, in [35mget_connection[0m
+    c = Client(address, authkey=process.current_process().authkey)
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/connection.py"[0m, line [35m536[0m, in [35mClient[0m
+    c = SocketClient(address)
+  File [35m"/home/matheus/.local/share/uv/python/cpython-3.14.0-linux-x86_64-gnu/lib/python3.14/multiprocessing/connection.py"[0m, line [35m664[0m, in [35mSocketClient[0m
+    [31ms.connect[0m[1;31m(address)[0m
+    [31m~~~~~~~~~[0m[1;31m^^^^^^^^^[0m
+[1;35mFileNotFoundError[0m: [35m[Errno 2] No such file or directory[0m
+🧹 Trial 1 cleanup completed
+[33m[W 2025-12-02 21:29:52,246][0m Trial 1 failed with parameters: {'model': 'yolo12s', 'batch_size': 8, 'imgsz': 256, 'optimizer': 'SGD', 'multi_scale': False, 'lr0': 5.613136993481251e-05, 'dropout': 0.0908786358473959} because of the following error: KeyboardInterrupt().[0m
+Traceback (most recent call last):
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/optuna/study/_optimize.py"[0m, line [35m205[0m, in [35m_run_trial[0m
+    value_or_values = func(trial)
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/steps/02_train_model.py"[0m, line [35m101[0m, in [35mtrain[0m
+    results = model.train(
+        project=None,
+    ...<15 lines>...
+        workers=max_workers
+    )
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/engine/model.py"[0m, line [35m773[0m, in [35mtrain[0m
+    [31mself.trainer.train[0m[1;31m()[0m
+    [31m~~~~~~~~~~~~~~~~~~[0m[1;31m^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/engine/trainer.py"[0m, line [35m243[0m, in [35mtrain[0m
+    [31mself._do_train[0m[1;31m()[0m
+    [31m~~~~~~~~~~~~~~[0m[1;31m^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/engine/trainer.py"[0m, line [35m427[0m, in [35m_do_train[0m
+    loss, self.loss_items = [31mself.model[0m[1;31m(batch)[0m
+                            [31m~~~~~~~~~~[0m[1;31m^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py"[0m, line [35m1775[0m, in [35m_wrapped_call_impl[0m
+    return [31mself._call_impl[0m[1;31m(*args, **kwargs)[0m
+           [31m~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py"[0m, line [35m1786[0m, in [35m_call_impl[0m
+    return forward_call(*args, **kwargs)
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py"[0m, line [35m136[0m, in [35mforward[0m
+    return [31mself.loss[0m[1;31m(x, *args, **kwargs)[0m
+           [31m~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py"[0m, line [35m327[0m, in [35mloss[0m
+    preds = self.forward(batch["img"])
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py"[0m, line [35m137[0m, in [35mforward[0m
+    return [31mself.predict[0m[1;31m(x, *args, **kwargs)[0m
+           [31m~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py"[0m, line [35m154[0m, in [35mpredict[0m
+    return [31mself._predict_once[0m[1;31m(x, profile, visualize, embed)[0m
+           [31m~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py"[0m, line [35m176[0m, in [35m_predict_once[0m
+    x = m(x)  # run
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py"[0m, line [35m1775[0m, in [35m_wrapped_call_impl[0m
+    return [31mself._call_impl[0m[1;31m(*args, **kwargs)[0m
+           [31m~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py"[0m, line [35m1786[0m, in [35m_call_impl[0m
+    return forward_call(*args, **kwargs)
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/modules/conv.py"[0m, line [35m78[0m, in [35mforward[0m
+    return self.act(self.bn([31mself.conv[0m[1;31m(x)[0m))
+                            [31m~~~~~~~~~[0m[1;31m^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py"[0m, line [35m1775[0m, in [35m_wrapped_call_impl[0m
+    return [31mself._call_impl[0m[1;31m(*args, **kwargs)[0m
+           [31m~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py"[0m, line [35m1786[0m, in [35m_call_impl[0m
+    return forward_call(*args, **kwargs)
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py"[0m, line [35m548[0m, in [35mforward[0m
+    return [31mself._conv_forward[0m[1;31m(input, self.weight, self.bias)[0m
+           [31m~~~~~~~~~~~~~~~~~~[0m[1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  File [35m"/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py"[0m, line [35m543[0m, in [35m_conv_forward[0m
+    return [31mF.conv2d[0m[1;31m([0m
+           [31m~~~~~~~~[0m[1;31m^[0m
+        [1;31minput, weight, bias, self.stride, self.padding, self.dilation, self.groups[0m
+        [1;31m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+    [1;31m)[0m
+    [1;31m^[0m
+[1;35mKeyboardInterrupt[0m
+[33m[W 2025-12-02 21:29:52,251][0m Trial 1 failed with value None.[0m
+Traceback (most recent call last):
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_train_model.py", line 267, in <module>
+    study = optimize_hyperparameters(n_trials=3)
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_train_model.py", line 232, in optimize_hyperparameters
+    study.optimize(train, n_trials=n_trials)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/optuna/study/study.py", line 490, in optimize
+    _optimize(
+    ~~~~~~~~~^
+        study=self,
+        ^^^^^^^^^^^
+    ...<7 lines>...
+        show_progress_bar=show_progress_bar,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/optuna/study/_optimize.py", line 67, in _optimize
+    _optimize_sequential(
+    ~~~~~~~~~~~~~~~~~~~~^
+        study,
+        ^^^^^^
+    ...<8 lines>...
+        progress_bar=progress_bar,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/optuna/study/_optimize.py", line 164, in _optimize_sequential
+    frozen_trial_id = _run_trial(study, func, catch)
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/optuna/study/_optimize.py", line 262, in _run_trial
+    raise func_err
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/optuna/study/_optimize.py", line 205, in _run_trial
+    value_or_values = func(trial)
+  File "/home/matheus/Documents/PFP-IA-Engineering/steps/02_train_model.py", line 101, in train
+    results = model.train(
+        project=None,
+    ...<15 lines>...
+        workers=max_workers
+    )
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/engine/model.py", line 773, in train
+    self.trainer.train()
+    ~~~~~~~~~~~~~~~~~~^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/engine/trainer.py", line 243, in train
+    self._do_train()
+    ~~~~~~~~~~~~~~^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/engine/trainer.py", line 427, in _do_train
+    loss, self.loss_items = self.model(batch)
+                            ~~~~~~~~~~^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py", line 136, in forward
+    return self.loss(x, *args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py", line 327, in loss
+    preds = self.forward(batch["img"])
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py", line 137, in forward
+    return self.predict(x, *args, **kwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py", line 154, in predict
+    return self._predict_once(x, profile, visualize, embed)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/tasks.py", line 176, in _predict_once
+    x = m(x)  # run
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/ultralytics/nn/modules/conv.py", line 78, in forward
+    return self.act(self.bn(self.conv(x)))
+                            ~~~~~~~~~^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 548, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/matheus/Documents/PFP-IA-Engineering/.venv/lib/python3.14/site-packages/torch/nn/modules/conv.py", line 543, in _conv_forward
+    return F.conv2d(
+           ~~~~~~~~^
+        input, weight, bias, self.stride, self.padding, self.dilation, self.groups
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+KeyboardInterrupt
