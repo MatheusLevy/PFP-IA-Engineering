@@ -2,5 +2,5 @@
     remote = data-labeling
 ['remote "data-labeling"']
     url = s3://data-labeling-s3
-    endpointurl = http://localhost:9444/
-    profile = pfp-ia-engineering
+    endpointurl = http://s3-ninja.s3-ninja.svc.cluster.local:9000
+    profile = pfp
