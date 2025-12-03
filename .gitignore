@@ -2,3 +2,9 @@
 /dataset
 /dataset_info.csv
 /recreated_splits
+/runs
+/wandb
+*.pt
+*.db
+/.venv
+/training_info.json

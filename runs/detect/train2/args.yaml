@@ -5,7 +5,7 @@ data: ./dataset/data_freeze.yaml
 epochs: 10
 time: null
 patience: 100
-batch: 8
+batch: 16
 imgsz: 256
 save: false
 save_period: -1
@@ -16,7 +16,7 @@ project: null
 name: train2
 exist_ok: false
 pretrained: true
-optimizer: SGD
+optimizer: NAdam
 verbose: false
 seed: 0
 deterministic: true
@@ -29,11 +29,11 @@ amp: true
 fraction: 1.0
 profile: false
 freeze: null
-multi_scale: false
+multi_scale: true
 compile: false
 overlap_mask: true
 mask_ratio: 4
-dropout: 0.0908786358473959
+dropout: 0.06623198455584217
 val: true
 split: val
 save_json: false
@@ -70,7 +70,7 @@ simplify: true
 opset: null
 workspace: null
 nms: false
-lr0: 5.613136993481251e-05
+lr0: 0.01440742725904646
 lrf: 0.01
 momentum: 0.937
 weight_decay: 0.0005

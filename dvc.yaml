@@ -24,11 +24,11 @@ stages:
     cmd: python steps/04_promote_to_staging.py
     deps:
       - steps/04_promote_to_staging.py
-      - training_info.yaml
+      - training_info.json
   validate_with_production:
     cmd: python steps/05_validate_with_production.py
     deps:
       - steps/05_validate_with_production.py
-      - training_info.yaml
+      - training_info.json
       - data/
   
