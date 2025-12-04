@@ -25,7 +25,7 @@ def create_directory_structure(output_dir, include_drift_accumulative=True):
 
 def create_yaml_files(output_dir):
     yaml_configs = {
-        'data_freeze. yaml': {
+        'data_freeze.yaml': {
             'test_dir': './test_freeze/images'
         },
         'data_drift.yaml': {

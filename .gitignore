@@ -8,3 +8,4 @@
 *.db
 /.venv
 /training_info.json
+/.dvc
