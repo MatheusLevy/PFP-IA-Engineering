@@ -7,10 +7,19 @@ import json
 FIXED_MODEL_NAME = "yolo-rock-paper-scissors"
 
 def setup_mlflow_environment():
-    os.environ['MLFLOW_S3_ENDPOINT_URL'] = 'http://localhost:9444'
-    os.environ['AWS_ACCESS_KEY_ID'] = 'AKIAIOSFODNN7EXAMPLE'
-    os.environ['AWS_SECRET_ACCESS_KEY'] = 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
-    mlflow.set_tracking_uri("http://localhost:5000")
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+    s3_endpoint = os.getenv("MLFLOW_S3_ENDPOINT_URL")
+    
+    if not tracking_uri:
+        raise RuntimeError("MLFLOW_TRACKING_URI não está definida no ambiente")
+    if not s3_endpoint:
+        raise RuntimeError("MLFLOW_S3_ENDPOINT_URL não está definida no ambiente")
+    
+    mlflow.set_tracking_uri(tracking_uri)
+    
+    print(f"MLflow Tracking URI: {tracking_uri}")
+    print(f"S3 Endpoint URL: {s3_endpoint}")
+
 
 def load_training_info(info_file="training_info.json"):
     try:
@@ -24,8 +33,8 @@ def load_training_info(info_file="training_info.json"):
         print(f"Error loading training info: {e}")
         return None
 
+
 def get_or_create_model(client, model_name):
-    """Get existing model or create new one if it doesn't exist"""
     try:
         model = client.get_registered_model(model_name)
         print(f"Using existing model: {model_name}")
@@ -40,11 +49,11 @@ def get_or_create_model(client, model_name):
         return model
         
     except Exception as e:
-        print(f"New model '{model_name}' not found, creating new model...")
+        print(f"Model '{model_name}' not found, creating new model...")
         try:
             model = client.create_registered_model(
                 name=model_name,
-                description=f"YOLO model for Rock-Paper-Scissors detection - Optimized with Optuna"
+                description="YOLO model for Rock-Paper-Scissors detection - Optimized with Optuna"
             )
             print(f"Model '{model_name}' created successfully")
             return model
@@ -52,8 +61,8 @@ def get_or_create_model(client, model_name):
             print(f"Error creating model: {create_error}")
             return None
 
+
 def get_next_version(client, model_name):
-    """Get the next version number for the model"""
     try:
         versions = client.search_model_versions(f"name='{model_name}'")
         if not versions:
@@ -61,27 +70,31 @@ def get_next_version(client, model_name):
         
         max_version = max([int(v.version) for v in versions])
         next_version = str(max_version + 1)
-        print(f"🔢 Next version will be: {next_version}")
+        print(f"Next version will be: {next_version}")
         return next_version
         
     except Exception as e:
         print(f"Error determining next version: {e}")
         return "1"
 
+
 def update_training_info(training_info, model_name, model_version, run_id, info_file="training_info.json"):
-    """Update training_info.json with MLflow model information"""
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+    
     training_info["mlflow"] = {
         "model_name": model_name,
         "model_version": model_version,
         "run_id": run_id,
         "logged_timestamp": dt.datetime.now(dt.UTC).isoformat(),
-        "model_uri": f"models:/{model_name}/{model_version}"
+        "model_uri": f"models:/{model_name}/{model_version}",
+        "tracking_uri": tracking_uri
     }
     
     with open(info_file, 'w') as f:
         json.dump(training_info, f, indent=2)
     
     print(f"Training info updated with MLflow details: {info_file}")
+
 
 def log_model_to_mlflow(training_info):
     if not training_info:
@@ -132,13 +145,15 @@ def log_model_to_mlflow(training_info):
             description=f"Optuna optimized version - mAP50_90: {metrics['mAP50_90']:.4f} | Architecture: {best_params['model']} | Optimizer: {best_params['optimizer']}"
         )
         
+        tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+        
         print(f"Model version registered!")
-        print(f"Name: {model_version.name}")
-        print(f"Version: {model_version.version}")
-        print(f"Performance: mAP50_90={metrics['mAP50_90']:.4f}")
-        print(f"Architecture: {best_params['model']}")
-        print(f"Optimizer: {best_params['optimizer']}")
-        print(f"Access: http://localhost:5000")
+        print(f"  Name: {model_version.name}")
+        print(f"  Version: {model_version.version}")
+        print(f"  Performance: mAP50_90={metrics['mAP50_90']:.4f}")
+        print(f"  Architecture: {best_params['model']}")
+        print(f"  Optimizer: {best_params['optimizer']}")
+        print(f"  Access: {tracking_uri}")
         
         initial_tags = {
             "stage": "none",
@@ -166,8 +181,8 @@ def log_model_to_mlflow(training_info):
         print(f"Registration error: {e}")
         return False, None, None, None
 
+
 def show_model_history(client, model_name):
-    """Show history of all versions for the model"""
     try:
         versions = client.search_model_versions(f"name='{model_name}'")
         if not versions:
@@ -182,7 +197,7 @@ def show_model_history(client, model_name):
             perf = version.tags.get("performance_map50_90", "N/A") if version.tags else "N/A"
             arch = version.tags.get("architecture", "N/A") if version.tags else "N/A"
             
-            print(f"🔢 Version {version.version} | Stage: {stage} | mAP50_90: {perf} | Arch: {arch}")
+            print(f"Version {version.version} | Stage: {stage} | mAP50_90: {perf} | Arch: {arch}")
             if version.description:
                 print(f"   └── {version.description[:100]}...")
         
@@ -190,6 +205,7 @@ def show_model_history(client, model_name):
         
     except Exception as e:
         print(f"Error showing model history: {e}")
+
 
 def main():
     print("Starting MLflow logging process...")
@@ -204,13 +220,13 @@ def main():
     
     if training_info:
         print("\nTraining Results Summary:")
-        print(f"   mAP50: {training_info['metrics']['mAP50']:.4f}")
-        print(f"   mAP50_90: {training_info['metrics']['mAP50_90']:.4f}")
-        print(f"   Mean Precision: {training_info['metrics']['mean_precision']:.4f}")
-        print(f"   Mean Recall: {training_info['metrics']['mean_recall']:.4f}")
-        print(f"   Best Model: {training_info['best_params']['model']}")
-        print(f"   Best Optimizer: {training_info['best_params']['optimizer']}")
-        print(f"   Training Time: {training_info['timestamp']}")
+        print(f"  mAP50: {training_info['metrics']['mAP50']:.4f}")
+        print(f"  mAP50_90: {training_info['metrics']['mAP50_90']:.4f}")
+        print(f"  Mean Precision: {training_info['metrics']['mean_precision']:.4f}")
+        print(f"  Mean Recall: {training_info['metrics']['mean_recall']:.4f}")
+        print(f"  Best Model: {training_info['best_params']['model']}")
+        print(f"  Best Optimizer: {training_info['best_params']['optimizer']}")
+        print(f"  Training Time: {training_info['timestamp']}")
         
         success, model_name, model_version, run_id = log_model_to_mlflow(training_info)
         
@@ -218,8 +234,8 @@ def main():
             update_training_info(training_info, model_name, model_version, run_id)
             
             print("\nModel logging completed successfully!")
-            print(f"Model Name: {model_name}")
-            print(f"Model Version: {model_version}")
+            print(f"  Model Name: {model_name}")
+            print(f"  Model Version: {model_version}")
             print("Next step: Run 04_promote_to_staging.py to promote to staging")
             
             show_model_history(client, model_name)
@@ -227,6 +243,7 @@ def main():
             print("\nModel logging failed!")
     else:
         print("\nNo training info found. Please run 02_train_model.py first.")
+
 
 if __name__ == "__main__":
     main()
