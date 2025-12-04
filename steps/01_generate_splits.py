@@ -5,17 +5,17 @@ import shutil
 def create_directory_structure(output_dir, include_drift_accumulative=True):
     dirs_to_create = [
         os.path.join(output_dir, 'train', 'images'),
-        os.path. join(output_dir, 'train', 'labels'),
-        os.path. join(output_dir, 'valid', 'images'),
-        os.path. join(output_dir, 'valid', 'labels'),
-        os.path. join(output_dir, 'test_freeze', 'images'),
-        os. path.join(output_dir, 'test_freeze', 'labels')
+        os.path.join(output_dir, 'train', 'labels'),
+        os.path.join(output_dir, 'valid', 'images'),
+        os.path.join(output_dir, 'valid', 'labels'),
+        os.path.join(output_dir, 'test_freeze', 'images'),
+        os.path.join(output_dir, 'test_freeze', 'labels')
     ]
     
     if include_drift_accumulative:
-        dirs_to_create. extend([
-            os. path.join(output_dir, 'test_accumulative', 'images'),
-            os.path. join(output_dir, 'test_accumulative', 'labels'),
+        dirs_to_create.extend([
+            os.path.join(output_dir, 'test_accumulative', 'images'),
+            os.path.join(output_dir, 'test_accumulative', 'labels'),
             os.path.join(output_dir, 'test_drift', 'images'),
             os.path.join(output_dir, 'test_drift', 'labels')
         ])
@@ -48,11 +48,11 @@ roboflow:
   project: rock-paper-scissors-sxsw
   version: 14
   license: Private
-  url: https://universe.roboflow. com/roboflow-58fyf/rock-paper-scissors-sxsw/dataset/14"""
+  url: https://universe.roboflow.com/roboflow-58fyf/rock-paper-scissors-sxsw/dataset/14"""
     
     for filename, config in yaml_configs.items():
-        yaml_path = os. path.join(output_dir, filename)
-        content = base_content. format(test_dir=config['test_dir'])
+        yaml_path = os.path.join(output_dir, filename)
+        content = base_content.format(test_dir=config['test_dir'])
         
         with open(yaml_path, 'w') as f:
             f.write(content)
@@ -62,11 +62,11 @@ roboflow:
 def copy_files(image_list, source_images_dir, source_labels_dir, dest_images_dir, dest_labels_dir):
     for image_name in image_list:
         source_image_path = os.path.join(source_images_dir, image_name)
-        dest_image_path = os.path. join(dest_images_dir, image_name)
+        dest_image_path = os.path.join(dest_images_dir, image_name)
         if os.path.exists(source_image_path):
             shutil.copy2(source_image_path, dest_image_path)
         
-        label_name = os.path.splitext(image_name)[0] + '. txt'
+        label_name = os.path.splitext(image_name)[0] + '.txt'
         source_label_path = os.path.join(source_labels_dir, label_name)
         dest_label_path = os.path.join(dest_labels_dir, label_name)
         
@@ -89,7 +89,7 @@ def recreate_splits_from_csv(csv_path, source_data_dir, output_dir, iteration=No
     
     create_directory_structure(output_dir, include_drift_accumulative=True)
     
-    source_images_dir = os. path.join(source_data_dir, 'images')
+    source_images_dir = os.path.join(source_data_dir, 'images')
     source_labels_dir = os.path.join(source_data_dir, 'labels')
     
     splits_dict = {
@@ -103,7 +103,7 @@ def recreate_splits_from_csv(csv_path, source_data_dir, output_dir, iteration=No
     
     for _, row in df.iterrows():
         image_name = row['image_name']
-        splits = row['splits'].split(',') if pd. notna(row['splits']) else []
+        splits = row['splits'].split(',') if pd.notna(row['splits']) else []
         
         for split in splits:
             split = split.strip()
@@ -138,16 +138,16 @@ def recreate_specific_split(csv_path, source_data_dir, output_dir, split_name, i
     for _, row in df.iterrows():
         splits = row['splits'].split(',') if pd.notna(row['splits']) else []
         if split_name in [s.strip() for s in splits]:
-            split_images. add(row['image_name'])
+            split_images.add(row['image_name'])
     
     if not split_images:
         print(f"No images found for split '{split_name}'")
         return
     
-    dest_images_dir = os. path.join(output_dir, split_name, 'images')
+    dest_images_dir = os.path.join(output_dir, split_name, 'images')
     dest_labels_dir = os.path.join(output_dir, split_name, 'labels')
     os.makedirs(dest_images_dir, exist_ok=True)
-    os. makedirs(dest_labels_dir, exist_ok=True)
+    os.makedirs(dest_labels_dir, exist_ok=True)
     
     source_images_dir = os.path.join(source_data_dir, 'images')
     source_labels_dir = os.path.join(source_data_dir, 'labels')
@@ -159,12 +159,12 @@ def recreate_specific_split(csv_path, source_data_dir, output_dir, split_name, i
     print(f"Split '{split_name}' recreated successfully!")
 
 def main():
-    script_dir = os. path.dirname(os.path.abspath(__file__))
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
     
-    csv_path = os. path.join(project_root, 'dataset_info.csv')
-    source_data_dir = os. path.join(project_root, 'data')
-    output_dir = os. path.join(project_root, 'dataset')
+    csv_path = os.path.join(project_root, 'dataset_info.csv')
+    source_data_dir = os.path.join(project_root, 'data')
+    output_dir = os.path.join(project_root, 'dataset')
     
     recreate_splits_from_csv(csv_path, source_data_dir, output_dir, iteration=None)
 
