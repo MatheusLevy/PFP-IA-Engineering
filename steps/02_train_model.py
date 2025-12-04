@@ -117,7 +117,13 @@ def train(trial):
             device=get_device(),
             workers=max_workers
         )
-        
+        del model
+
+        print("Limpando Memória...")
+        torch.cuda.empty_cache()
+        gc.collect()
+        print("Memória Limpa.")
+
         mean_precision, mean_recall, mAP50, mAP50_90 = tuple(results.box.mean_results())
         
         final_metrics = {
