@@ -1,7 +1,10 @@
+import os
+os.environ["MLFLOW_TRACKING_URI"] = ""
+os.environ["YOLO_MLFLOW"] = "false"
+
 import torch
 import gc
 import datetime as dt
-import os
 import optuna
 from optuna.pruners import BasePruner
 from optuna.trial import TrialState
