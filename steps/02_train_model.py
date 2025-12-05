@@ -21,18 +21,18 @@ def get_device():
 
 models = ["yolo12n", "yolo12s"]
 data = "./dataset/data_freeze.yaml"
-epochs = 10
+epochs = 20
 patience = 100
-min_batch_size = 2
-max_batch_size = 5
+min_batch_size = 8
+max_batch_size = 16
 batch_size_step = 2
-image_size = [256, 320]
-cache = True
+image_size = [256, 512]
+cache = 'ram'
 optimizer = ["SGD", "Adam", "AdamW", "NAdam", "RAdam", "RMSProp"]
 multi_scale = [True, False]
 cos_lr = [True, False]
 close_mosaic_min = 1
-close_mosaic_max = 100
+close_mosaic_max = 20
 amp = True
 lr0_min = 1e-5
 lr0_max = 1e-1
@@ -272,9 +272,13 @@ def save_training_info(best_params, final_results, output_file="training_info.js
 
 if __name__ == "__main__":
     os.environ["WANDB_SILENT"] = "true"
-    
+    gc.collect()
+    torch.cuda.empty_cache()
+
     study = optimize_hyperparameters(n_trials=3)
     
+    gc.collect()
+    torch.cuda.empty_cache()
     best_params = study.best_params
     final_model = YOLO(f"{best_params['model']}.pt")
     
@@ -294,7 +298,8 @@ if __name__ == "__main__":
         save=True,
         plots=True
     )
-    
+    gc.collect()
+    torch.cuda.empty_cache()
     save_training_info(best_params, final_results)
     
     print("Training completed!")
