@@ -11,10 +11,19 @@ import torch
 FIXED_MODEL_NAME = "yolo-rock-paper-scissors"
 
 def setup_mlflow_environment():
-    os.environ['MLFLOW_S3_ENDPOINT_URL'] = 'http://localhost:9444'
-    os.environ['AWS_ACCESS_KEY_ID'] = 'AKIAIOSFODNN7EXAMPLE'
-    os.environ['AWS_SECRET_ACCESS_KEY'] = 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
-    mlflow.set_tracking_uri("http://localhost:5000")
+    tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+    s3_endpoint = os.getenv("MLFLOW_S3_ENDPOINT_URL")
+    
+    if not tracking_uri:
+        raise RuntimeError("MLFLOW_TRACKING_URI não está definida no ambiente")
+    if not s3_endpoint:
+        raise RuntimeError("MLFLOW_S3_ENDPOINT_URL não está definida no ambiente")
+    
+    mlflow.set_tracking_uri(tracking_uri)
+    
+    print(f"MLflow Tracking URI: {tracking_uri}")
+    print(f"S3 Endpoint URL: {s3_endpoint}")
+
 
 def get_device():
     device = "cpu"
