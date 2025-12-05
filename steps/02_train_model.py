@@ -21,12 +21,12 @@ def get_device():
 
 models = ["yolo12n", "yolo12s"]
 data = "./dataset/data_freeze.yaml"
-epochs = 20
+epochs = 10
 patience = 100
-min_batch_size = 8
-max_batch_size = 16
+min_batch_size = 4
+max_batch_size = 8
 batch_size_step = 2
-image_size = [256, 512]
+image_size = [256, 320]
 cache = 'ram'
 optimizer = ["SGD", "Adam", "AdamW", "NAdam", "RAdam", "RMSProp"]
 multi_scale = [True, False]
